@@ -7,6 +7,7 @@ import csv
 
 csvpath = os.path.join( 'Resources', 'election_data.csv')
 
+# initialize variables and create empty lists
 count_votes = 0
 candidates = []
 votes =[]
@@ -17,8 +18,6 @@ with open (csvpath) as csvfile:
     csvreader = csv.reader(csvfile, delimiter = ',')
 
     csv_header = next(csvreader)
-
-    print(f"csvheader: {csv_header}")
 
     # read in data and count the total number of votes
     for row in csvreader:
@@ -46,7 +45,7 @@ for j in range(len(candidates)):
         
 winner = candidates[candidate_count.index(max(candidate_count))]
 
-
+# print to terminal
 print("")
 print("Election Results")
 print("------------------------------")
@@ -65,7 +64,7 @@ output_path = os.path.join("analysis", "election_analysis.txt")
 with open(output_path, 'w', newline='') as text:
 
     
-    
+    # write results in text file
     text.write("Election Results \n")
     text.write("------------------------------ \n")
     text.write(f"Total Votes: {count_votes} \n") 

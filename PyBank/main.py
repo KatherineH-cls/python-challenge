@@ -13,14 +13,12 @@ with open (csvpath) as csvfile:
 
     csv_header = next(csvreader)
 
-    #print(f"csvheader: {csv_header}")
-
+    # initialize variables and create empty lists
     count_months = 0
     total_profit = 0
     max_profit = 0
     max_loss = 0
     change_profit = []
-    #profit_data = []
     month = []
     profit = []
     sum_change = 0
@@ -46,10 +44,13 @@ with open (csvpath) as csvfile:
         profit.append(float(row[1]))
 
     
+    # create list of change in profit and sum the change in profit at the same time
     for i in range(1,count_months):
         change_profit.append((profit[i]-profit[i-1]))
         sum_change += (profit[i]-profit[i-1])
 
+    # calculate average change in profit and round to 2 decimal places
+    # note that there is one less month in change lists
     avg_change = round((sum_change / (count_months - 1)),2)   
 
     for j in range(count_months-1):
@@ -63,9 +64,12 @@ with open (csvpath) as csvfile:
                 max_change_neg = change_profit[j]
                 max_neg_index = j
 
+    # use the index of max profit and loss to find the month
+    # the month list is one entry longer than the change list, so add 1 to index
     max_pos_month = month[max_pos_index + 1]
     max_neg_month = month[max_neg_index + 1]
     
+    # print to terminal
     print("")
     print("Financial Analysis")
     print("-------------------------------")
@@ -83,7 +87,7 @@ output_path = os.path.join("analysis", "financial_analysis.txt")
 with open(output_path, 'w', newline='') as text:
 
     
-    
+    # write text file
     text.write("Financial Analysis")
     text.write("\n")
     text.write("-------------------------------")
